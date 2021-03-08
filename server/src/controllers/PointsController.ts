@@ -15,7 +15,17 @@ class PointsController {
         .where('city', String(city))
         .where('state', String(state))
         .distinct()
-        .select('reciclario_order.tbPoint.*');
+        .select(
+            'reciclario_order.tbPoint.uuid', 
+            'reciclario_order.tbPoint.image',
+            'reciclario_order.tbPoint.name',
+            'reciclario_order.tbPoint.email',
+            'reciclario_order.tbPoint.phone',
+            'reciclario_order.tbPoint.latitude',
+            'reciclario_order.tbPoint.longitude',
+            'reciclario_order.tbPoint.city',
+            'reciclario_order.tbPoint.state'
+        );
 
         return response.json({ 'sucess': 1, points });
     }
