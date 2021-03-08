@@ -9,7 +9,7 @@ const connection = require('knex')({
     host : '127.0.0.1',
     user : process.env.APP_USER,
     password : process.env.APP_PASSWORD,
-    database : process.env.APP_DATABASE,
+   //  database : process.env.APP_DATABASE,
     charset  : 'utf8'
   },  
 });

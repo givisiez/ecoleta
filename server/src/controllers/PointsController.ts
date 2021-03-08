@@ -9,13 +9,13 @@ class PointsController {
         .split(',')
         .map(item => Number(item.trim()));
 
-      const points = await knex('tbPoint')
-       .join('tbPointItem', 'tbPoint.idPoint', '=', 'tbPointItem.idPoint')
-        .whereIn('tbPointItem.idItem', parsedItems)
+      const points = await knex('reciclario_order.tbPoint')
+       .join('reciclario_order.tbPointItem', 'reciclario_order.tbPoint.idPoint', '=', 'reciclario_order.tbPointItem.idPoint')
+        .whereIn('reciclario_order.tbPointItem.idItem', parsedItems)
         .where('city', String(city))
         .where('state', String(state))
         .distinct()
-        .select('tbPoint.*');
+        .select('reciclario_order.tbPoint.*');
 
         return response.json({ 'sucess': 1, points });
     }
@@ -23,7 +23,7 @@ class PointsController {
     async show (request: Request, response: Response) {
         const { id } = request.params;      
 
-        // const pointId = await knex('tbPoint').where('uuid', id).select('uuid').first();
+        // const pointId = await knex('reciclario_order.tbPoint').where('uuid', id).select('uuid').first();
 
         /* 
         const parsedId = 
@@ -31,7 +31,7 @@ class PointsController {
 
         console.log(parsedId); */
         
-        const point = await knex('tbPoint').where('idPoint', id).select(
+        const point = await knex('reciclario_order.tbPoint').where('idPoint', id).select(
             'uuid',
             'image',
             'name',
@@ -45,10 +45,10 @@ class PointsController {
             return response.status(400).json({'sucess': 0, 'msg': 'Ponto não encontrado!'});
         }
 
-        const items = await knex('tbItem')
-        .join('tbPointItem','tbPointItem.idItem', '=', 'tbItem.idItem')
-        .where('tbPointItem.idPoint', id)
-        .select('tbItem.title');
+        const items = await knex('reciclario_order.tbPointItemList')
+        .join('reciclario_order.tbPointItem','tbPointItem.idItem', '=', 'reciclario_order.tbPointItemList.idItem')
+        .where('reciclario_order.tbPointItem.idPoint', id)
+        .select('reciclario_order.tbPointItemList.title');
 
         return response.json({ 'sucess': 1, point, items });
     }
@@ -81,7 +81,7 @@ class PointsController {
         
         try {
             // TODO: Adicionar em uma procedure
-            const insertedtIds = await trx('tbPoint').insert(point);
+            const insertedtIds = await trx('reciclario_order.tbPoint').insert(point);
     
             const idPoint = insertedtIds[0];
     
@@ -93,12 +93,13 @@ class PointsController {
                 }
             });   
     
-            await trx('tbPointItem').insert(pointItems); 
+            await trx('reciclario_order.tbPointItem').insert(pointItems); 
     
             trx.commit();
     
         } catch (error) {
             trx.rollback();
+            console.log(error);
     
             return response.json({ 'success': 0 , 'msg': 'Erro ao salvar os dados no banco!'});
         } 

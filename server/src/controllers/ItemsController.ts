@@ -3,7 +3,7 @@ import knex from '../../database/connection';
 
 class ItemsController {
     async index (request: Request, response: Response) {
-        const items = await knex('tbItem').select('uuid','image','title'); 
+        const items = await knex('reciclario_order.tbPointItemList').select('uuid','image','title'); 
       
         const web = process.env.SERVER_WEB_HOST;
         const portServer = process.env.SERVER_PORT;    
