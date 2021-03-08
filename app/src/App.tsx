@@ -1,9 +1,16 @@
 import React from 'react';
+import Header from './Header';
+
 import './App.css';
 
 function App() {
   return (
-    <h1>Teste</h1>
+    <div>
+      <Header title="Ecoleta"/>
+      <h1>
+        Conteudo
+      </h1>
+    </div>
   );
 }
 
