@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface HeaderProps {
-	title: string;	
+	title?: string;	
 }
 
 const Header: React.FC<HeaderProps> = (props) => {
