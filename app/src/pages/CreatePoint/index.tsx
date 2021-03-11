@@ -1,8 +1,9 @@
-import  { useEffect, useState } from 'react';
+import  { useEffect, useState, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import axios from 'axios';
+import { LeafletMouseEvent } from 'leaflet';
 import api from '../../services/api';
 
 import './styles.css';
@@ -17,8 +18,13 @@ interface Item {
     title: string;
     image_url: string;
 }
+
 interface IbgeStateInitial {
     sigla: string;
+    nome: string;
+}
+
+interface IbgeCityResponse {
     nome: string;
 }
 
@@ -26,7 +32,11 @@ const CreatePoint = () => {
     
     const [items, setItems] = useState<Item[]>([]);
     const [states, setStates] = useState<string[]>([]);
-    const [initials, setInitials] = useState<string[]>([]);
+    const [cities, setCities] = useState<string[]>([]);
+    // const [initials, setInitials] = useState<string[]>([]);
+
+    const [selectedState, setSelectedState] = useState('0');
+    const [selectedCity, setSelectedCity] = useState('0');
 
     useEffect(() => {
         api.get('items').then(response => {
@@ -35,14 +45,48 @@ const CreatePoint = () => {
     }, []);
 
     useEffect(() => {
-        axios.get<IbgeStateInitial[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados/?orderBy=nome').then(response => {
+        axios.get<IbgeStateInitial[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados/?orderBy=nome')
+        .then(response => {
             const state = response.data.map(state => state.sigla);
-            const initial = response.data.map(name => name.nome);
+            // const initial = response.data.map(name => name.nome);
 
             setStates(state);
-            setInitials(initial);
+           //  setInitials(initial);
         });
-    }, []);    
+    }, []);  
+    
+    useEffect(() => {
+
+        if (selectedState === '0') {
+            return;
+        }
+
+        axios.get<IbgeCityResponse[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${ selectedState }/municipios`)
+        .then(response => {
+            const cityNames = response.data.map(city => city.nome);
+            // const initial = response.data.map(name => name.nome);
+
+            setCities(cityNames);
+           //  setInitials(initial);
+        });
+
+    }, [selectedState]);
+
+    function handleSelectState(event: ChangeEvent<HTMLSelectElement>) {
+        const state = event.target.value;
+
+        setSelectedState(state);
+    }
+
+    function handleSelectCity(event: ChangeEvent<HTMLSelectElement>) {
+        const city = event.target.value;
+
+        setSelectedCity(city);
+    }
+
+   /* function handleMapClick( event: LeafletMouseEvent ){      
+        event.latlng;
+    }*/
 
     return (
         <div id="page-create-point">
@@ -117,7 +161,13 @@ const CreatePoint = () => {
                     <div className="field-group">                        
                         <div className="field">
                             <label htmlFor="state">Estado (UF)</label>
-                            <select name="state" id="state">                                
+                            <select 
+                                name="state" 
+                                id="state" 
+                                value={ selectedState } 
+                                onChange={ handleSelectState }
+                            >
+                                <option value="0">Selecione uma UF</option>                              
                                 { states.map( state => (                                    
                                     <option key={ state } value={ state }>{ state }</option>
                                 )) }
@@ -125,8 +175,16 @@ const CreatePoint = () => {
                         </div>
                         <div className="field">
                             <label htmlFor="city">Cidade</label>
-                            <select name="city" id="city">
+                            <select 
+                                name="city" 
+                                id="city"
+                                value={ selectedCity }
+                                onChange={ handleSelectCity }
+                            >
                                 <option value="0">Selecione uma cidade</option>
+                                { cities.map( city => (                                    
+                                    <option key={ city } value={ city }>{ city }</option>
+                                )) }
                             </select>
                         </div>
                     </div> 
@@ -139,7 +197,7 @@ const CreatePoint = () => {
                             <Popup>
                                 A pretty CSS3 popup. <br /> Easily customizable.
                             </Popup>
-                        </Marker>
+                        </Marker>                        
                     </MapContainer>                 
                 </fieldset>
 
