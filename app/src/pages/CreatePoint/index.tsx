@@ -1,17 +1,21 @@
 import  { useEffect, useState, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import axios from 'axios';
-import { LeafletMouseEvent } from 'leaflet';
+
+import { loadMapApi } from '../Utils/GoogleMapsUtils';
+import Map from '../../pages/Map';
+
+// import { MapContainer, TileLayer, Marker, Popup  } from 'react-leaflet';
+// import markerIconPng from "leaflet/dist/images/marker-icon.png";
+// import { Icon } from 'leaflet';
 import api from '../../services/api';
 
 import './styles.css';
-import "leaflet/dist/leaflet.css";
+// import "leaflet/dist/leaflet.css";
 
 import logo from '../../assets/logo.svg';
-import markerIconPng from "leaflet/dist/images/marker-icon.png";
-import { Icon } from 'leaflet';
+
 
 interface Item {
     id: string;
@@ -33,10 +37,19 @@ const CreatePoint = () => {
     const [items, setItems] = useState<Item[]>([]);
     const [states, setStates] = useState<string[]>([]);
     const [cities, setCities] = useState<string[]>([]);
-    // const [initials, setInitials] = useState<string[]>([]);
+    // const [initials, setInitials] = useState<string[]>([]);     
 
     const [selectedState, setSelectedState] = useState('0');
     const [selectedCity, setSelectedCity] = useState('0');
+
+    const [scriptLoaded, setScriptLoaded] = useState(false);
+
+    useEffect ( () => {
+        const googleMapScript = loadMapApi();
+        googleMapScript.addEventListener('load', function() {
+            setScriptLoaded(true);
+        })
+    }, []);
 
     useEffect(() => {
         api.get('items').then(response => {
@@ -84,12 +97,8 @@ const CreatePoint = () => {
         setSelectedCity(city);
     }
 
-   /* function handleMapClick( event: LeafletMouseEvent ){      
-        event.latlng;
-    }*/
-
     return (
-        <div id="page-create-point">
+        <div id="page-create-point"> 
             <header>
                 <img src={ logo } alt="Ecoleta" />
 
@@ -187,19 +196,15 @@ const CreatePoint = () => {
                                 )) }
                             </select>
                         </div>
-                    </div> 
-                    <MapContainer center={[-22.8734331, -43.4163019]} zoom={13} scrollWheelZoom={false}>
-                        <TileLayer
-                            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                        <Marker position={[-22.8734331, -43.4163019]}  icon={new Icon({iconUrl: markerIconPng, iconSize: [25, 41], iconAnchor: [12, 41]})}>
-                            <Popup>
-                                A pretty CSS3 popup. <br /> Easily customizable.
-                            </Popup>
-                        </Marker>                        
-                    </MapContainer>                 
+                    </div>                     
                 </fieldset>
+                
+                {scriptLoaded && (
+                    <Map
+                        mapType={google.maps.MapTypeId.ROADMAP} 
+                        mapTypeControl={true}
+                    />
+                )}            
 
                 <fieldset>
                     <legend>

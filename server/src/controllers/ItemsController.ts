@@ -5,8 +5,8 @@ class ItemsController {
     async index (request: Request, response: Response) {
         const items = await knex('reciclario_order.tbPointItemList').select('uuid','image','title'); 
       
-        const web = process.env.SERVER_WEB_HOST;
-        const portServer = process.env.SERVER_PORT;    
+        const web = process.env.REACT_APP_SERVER_WEB_HOST;
+        const portServer = process.env.REACT_APP_SERVER_PORT;    
         const serializedItems = items.map((item: { uuid: any; title: any; image: any; }) => {    
              
             return {

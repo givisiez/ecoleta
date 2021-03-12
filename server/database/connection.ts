@@ -7,9 +7,8 @@ const connection = require('knex')({
     version: 8,
     connection: {
     host : '127.0.0.1',
-    user : process.env.APP_USER,
-    password : process.env.APP_PASSWORD,
-   //  database : process.env.APP_DATABASE,
+    user : process.env.REACT_APP_APP_USER,
+    password : process.env.REACT_APP_APP_PASSWORD,   
     charset  : 'utf8'
   },  
 });

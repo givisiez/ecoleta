@@ -4,7 +4,7 @@ import routes from './routes';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
-const portServer = process.env.SERVER_PORT;
+const portServer = process.env.REACT_APP_SERVER_PORT;
 const app = express();
 
 /* ? informar no cors o dominio da plicacao {origin: '127.0.0.1'} */
