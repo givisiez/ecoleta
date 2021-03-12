@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 
-import './Map.scss'
+import './Map.scss';
 
 
 interface IMap {
@@ -30,6 +30,7 @@ const Map: React.FC<IMap> = ({mapType, mapTypeControl = false}) => {
         }
     };
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(startMap, [map]);
 
     const defaultMapStart = ():void => {
@@ -66,9 +67,11 @@ const Map: React.FC<IMap> = ({mapType, mapTypeControl = false}) => {
         }
     };
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(addSingleMarker, [marker]);
 
     const addMarker = (location: GoogleLatLng): void => {       
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const marker:GoogleMarker = new google.maps.Marker({
             position: location,
             map: map,
@@ -78,12 +81,12 @@ const Map: React.FC<IMap> = ({mapType, mapTypeControl = false}) => {
 
     const getIconAttributes = (iconColor: string) => {
         return {
-            path:'M11.0639 15.3003L26.3642 2.47559e-05L41.6646 15.3003L26.3638 51.3639L11.0639 15.3003 M22,17.5a4.5,4.5 0 1,0 9,0a4.5,4.5 0 1,0 -9,0Z',
-            fillColor: iconColor,
-            fillOpacity: 0.8,
-            strokColor: 'pink',
-            strokeWeight: 2,
-            anchor: new google.maps.Point(30, 50)
+            path:'M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z',
+            fillColor: 'blue',
+            fillOpacity: 0.8,            
+            strokeWeight: 1,
+            scale: 2,
+            anchor: new google.maps.Point(12, 21)
         };
     };
 
@@ -94,9 +97,9 @@ const Map: React.FC<IMap> = ({mapType, mapTypeControl = false}) => {
                     zoom: zoomLevel,
                     center: address,
                     mapTypeControl: mapTypeControl,
-                    streetViewControl: false,
+                    streetViewControl: true,
                     rotateControl: false,
-                    fullscreenControl: false,
+                    fullscreenControl: true,
                     panControl: false,                    
                     zoomControl: true,
                     gestureHandling: 'cooperative',                    
