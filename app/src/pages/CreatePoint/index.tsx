@@ -2,18 +2,10 @@ import  { useEffect, useState, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import axios from 'axios';
-
 import { loadMapApi } from '../Utils/GoogleMapsUtils';
 import Map from '../../pages/Map';
-
-// import { MapContainer, TileLayer, Marker, Popup  } from 'react-leaflet';
-// import markerIconPng from "leaflet/dist/images/marker-icon.png";
-// import { Icon } from 'leaflet';
 import api from '../../services/api';
-
 import './styles.css';
-// import "leaflet/dist/leaflet.css";
-
 import logo from '../../assets/logo.svg';
 
 
