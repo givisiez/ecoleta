@@ -1,7 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-
 import './Map.scss';
-
 
 interface IMap {
     mapType: google.maps.MapTypeId;
