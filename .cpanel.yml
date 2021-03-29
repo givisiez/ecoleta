@@ -1,4 +1,4 @@
 deployment:
   tasks:
-    - export DEPLOYPATH=/public_html/ecoleta/ecoleta
-    - /bin/cp -R images $DEPLOYPATH
+    - export DEPLOYPATH=/home/public_html/ecoleta/
+    - /bin/cp * $DEPLOYPATH
