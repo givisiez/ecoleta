@@ -33,8 +33,4 @@ NPM install
 
 ![Print sreen](https://github.com/givisiez/ecoleta/blob/main/app/public/images/layout-form.png?raw=true)
 
-![Print sreen](https://github.com/givisiez/ecoleta/blob/main/app/public/images/layout-new.png?raw=true)
-
-![Print sreen](https://github.com/givisiez/ecoleta/blob/main/app/public/images/layout-conclusao.png?raw=true)
-
 Treinamento realizado pela Roketseat - Next Level Week 1
