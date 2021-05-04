@@ -1,11 +1,24 @@
 # Ecoleta!
 
-Projeto que possui o propósito a reciclagem de resíduos que são muitas as vezes 
-descartados de forma indevida, gerando puluição do meio ambiente.
+Projeto para estudos, que possui o propósito a reciclagem de resíduos, onde muitas as vezes 
+descartados de forma indevida, gerando puluição ao meio ambiente.
 
 ## Integrações
 API Google Maps (plus) <br />
 API do IBGE
+
+## Variáveis de ambiente
+variáveis de ambientes utilizadas
+app
+<br />
+REACT_APP_GOOGLE_MAPS_API_KEY
+<br />
+server
+<br />
+REACT_APP_APP_USER=yourUser <br />
+REACT_APP_APP_PASSWORD=yourPassword <br />
+REACT_APP_SERVER_WEB_HOST=localhost <br />
+REACT_APP_SERVER_PORT=3333 <br />
 
 ## Instalação
 Após clonar o repositório rode o comando abaixo dentro do diretório da aplicação (app), para instalar as dependências.
