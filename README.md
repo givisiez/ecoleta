@@ -22,8 +22,8 @@ REACT_APP_SERVER_WEB_HOST=localhost <br />
 REACT_APP_SERVER_PORT=3333 <br />
 
 ## Instalação
-Após clonar o repositório rode o comando abaixo dentro do diretório da aplicação (app), para instalar as dependências.
-<br />. Repita o processo no diretório server.
+Após clonar o repositório, rode o comando abaixo dentro do diretório da aplicação (app), para instalar as dependências.
+<br />. Repita o processo no diretório (server).
 ```bash
 NPM install
 ```
