@@ -8,7 +8,7 @@ API Google Maps (plus) <br />
 API do IBGE
 
 ## Variáveis de ambiente
-Crie o arquivo .env na raiz do projeto, para utilizar as variáveis de ambientes da aplicação.
+Crie o arquivo .env na raiz do projeto, para utilizar as variáveis de ambiente da aplicação.
 <br />
 <b>./app</b>
 <br />
