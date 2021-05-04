@@ -8,7 +8,7 @@ API Google Maps (plus) <br />
 API do IBGE
 
 ## Instalação
-Após clonar o repositório rode o comando abaixo dentro do diretório da aplicação (App), para instalar as depéndências.
+Após clonar o repositório rode o comando abaixo dentro do diretório da aplicação (app), para instalar as dependências.
 <br />. Repita o processo no diretório server.
 ```bash
 NPM install
