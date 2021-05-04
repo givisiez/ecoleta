@@ -10,11 +10,11 @@ API do IBGE
 ## Variáveis de ambiente
 Crie o arquivo .env na raiz do projeto, para utilizar as variáveis de ambientes da aplicação.
 <br />
-./app
+<b>./app</b>
 <br />
 REACT_APP_GOOGLE_MAPS_API_KEY
 <br />
-./server
+<b>./server</b>
 <br />
 REACT_APP_APP_USER=yourUser <br />
 REACT_APP_APP_PASSWORD=yourPassword <br />
