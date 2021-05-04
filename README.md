@@ -1,7 +1,7 @@
 # Ecoleta!
 
 Projeto para estudos, que possui o propósito a reciclagem de resíduos, onde muitas as vezes 
-descartados de forma indevida, gerando puluição ao meio ambiente.
+descartados de forma indevida, gerando poluição ao meio ambiente.
 
 ## Integrações
 API Google Maps (plus) <br />
